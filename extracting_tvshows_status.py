@@ -5,7 +5,7 @@ import pandas as pd
 columns_name = ['name', 'season', 'status', 'tv_network', 'ano']
 tvshows = pd.DataFrame(columns = columns_name)
 
-for ano in range (2013, 2020):
+for ano in range (2013, 2021):
   print(ano)
   headers = {'User-Agent' : 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Mobile Safari/537.36'}
   url = 'https://www.metacritic.com/feature/tv-renewal-scorecard-' + str(ano) + '-' + str(ano+1) + '-season'
@@ -19,8 +19,17 @@ for ano in range (2013, 2020):
     rows = tables[i].find_all('tr')
     for row in rows:
       name = row.find('td', class_ = 'title')
-      season = name.find('span')
       status = name.find_next('td')
+      season = name.find('img', {"alt": "NEW"})
+      if season is not None:
+        # if there is an image in the title is because its the first season
+        season = "1"
+      else:
+        season = name.find("span")
+        if season is None:
+          season = ""
+        else:
+          season = season.text
       if isinstance(name.contents[0], NavigableString):
         if str(name.contents[0]).strip() == '':
           name = name.contents[1].text
@@ -28,10 +37,6 @@ for ano in range (2013, 2020):
           name = name.contents[0]
       else:
         name = name.contents[0].text
-      if season is None:
-        season = ""
-      else:
-        season = season.text
       if status is None:
         status = ""
       else:
@@ -48,7 +53,16 @@ for ano in range (2013, 2020):
   rows = tables[-1].find_all('tr')
   for row in rows:
       name = row.find('td', class_ = 'title')
-      season = name.find('span')
+      season = name.find('img', {"alt": "NEW"})
+      if season is not None:
+        # if there is an image in the title is because its the first season
+        season = "1"
+      else:
+        season = name.find("span")
+        if season is None:
+          season = ""
+        else:
+          season = season.text
       status = name.find_next('td')
       tv_network = row.find('td').find_next('td')
       if isinstance(name.contents[0], NavigableString):
@@ -58,10 +72,6 @@ for ano in range (2013, 2020):
           name = name.contents[0]
       else:
         name = name.contents[0].text
-      if season is None:
-        season = ""
-      else:
-        season = season.text
       if status is None:
         status = ""
       else:
