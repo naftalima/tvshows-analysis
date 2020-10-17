@@ -1,5 +1,7 @@
 # tvshows-analysis
 
+Made with <span style="color: #e25555;">&hearts;</span>
+
 ## Começando
 
 ### Instalando Dependencias
