@@ -8,9 +8,7 @@ Made with <span style="color: #e25555;">&hearts;</span>
 
 > pip3 install pandas
 
-
 > pip3 install numpy
-
 
 > pip3 install matplotlib
 
@@ -28,14 +26,18 @@ Made with <span style="color: #e25555;">&hearts;</span>
 
 > pip3 install requests
 
+> pip3 install optuna
+
+> pip3 install mlflow
 
 
 [Autenticação da Kaggle API](https://www.kaggle.com/docs/api)
 
-
-
 ### WebScrapping
 
 > python3 extracting_tvshows_status.py
+
+## License
+[MIT](https://choosealicense.com/licenses/mit/)
 
 ## Pronto  🎉🎉
